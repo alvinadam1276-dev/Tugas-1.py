@@ -7,56 +7,35 @@ print("S      Sayap             Rp.1500  ")
 print("----------------------------------")
 
 #Input banyak jenis ayam yang dibeli
-banyak_jenis = int(input("Banyak jenis : "))
+banyak = int(input("Banyak Jenis : "))
+total = 0
 
-#variable total bayar 
-Total_bayar=0
-Data_pesanan=[]
 
-#proses input data pesanan 
-for i in range(banyak_jenis):
-    print(f"\njenis ke-{i+1}")
-    kode = input ("kode potong [D/P/S]):").upper()
-    banyak_potong = int(input("banyak potong :  "))
-   
-    if   kode=="D":
-          jenis="Dada"
-          harga=2500
-    elif kode=="S":
-          jenis="Sayap"
-          harga=1500
-    elif kode=="P":
-          jenis="Paha"
-          harga=2000
+#Input pesanan
+for i in range(banyak):
+    print("\nJenis ke-" + str(i+1))
+    kode = input("Kode Potong [D/P/S] : ").upper()
+    jumlah = int(input("Banyak Potong : "))
+
+    if kode == "D":
+        jenis, harga = "Dada", 2500
+    elif kode == "P":
+        jenis, harga = "Paha", 2000
+    elif kode == "S":
+        jenis, harga = "Sayap", 1500
     else:
-         print("tidak ada dalam menu")
+        jenis="-"
+        harga=0
 
-jumlah = harga * banyak_potong
-Total_bayar += jumlah
- 
-#simpan ke list
-Data_pesanan.append([jenis, harga, banyak_potong, jumlah])
+    subtotal = harga * jumlah
+    total += subtotal
+    print(jenis + "  Rp" + str(harga) + " x " + str(jumlah) + " = Rp" + str(subtotal))
 
-#hitungan pajak 10%
-pajak = Total_bayar*0.10
-Total_bayar_akhir =  Total_bayar + pajak  
+pajak = total * 0.10
+total_akhir = total + pajak
 
-#bentuk tampilan hasil 
-
-print("\n-------------------------------------")
-print("          GEROBAK FRIED CHICKEN        ")
-print("---------------------------------------")
-
-print("  No jenis potong   banyak jumlah      ")
-print("---------------------------------------")
-
-no = 1
-for data in Data_pesanan:
-    print("{:<3} {:<13} Rp{:<6} {:<7} Rp{}".format(no, data[0], data[1], data[2], data[3]))
-    no += 1
-
-print("-----------------------------------------")
-print("Jumlah Bayar           Rp" + str(Total_bayar))
-print("Pajak 10%              Rp" + str(int(pajak)))
-print("Total Bayar            Rp" + str(int(Total_bayar_akhir)))
+print("\n=========================================")
+print("Total Bayar : Rp" + str(total))
+print("Pajak 10%   : Rp" + str(int(pajak)))
+print("TOTAL AKHIR : Rp" + str(int(total_akhir)))
 print("=========================================")
